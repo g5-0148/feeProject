@@ -25,7 +25,7 @@ A modern student developer community and portfolio-sharing platform. SkillSphere
 
 ## 🚀 How to Run Locally
 
-### 1. Clone the repo:
-```bash
-git clone [https://github.com/g5-0148/feeProject.git](https://github.com/g5-0148/feeProject.git)
-cd feeProject
+1. **Clone the repo:**
+   ```bash
+   git clone [https://github.com/g5-0148/feeProject.git](https://github.com/g5-0148/feeProject.git)
+   cd feeProject
