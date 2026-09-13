@@ -1,45 +1,31 @@
-🌐 SkillSphere
-A collaborative tech and skill-sharing platform built for student developers to showcase projects, exchange ideas, and network.
+# 🌐 SkillSphere
 
-✨ Features
-User Authentication: Dedicated Login and Sign-Up flows with input validation.
+A modern student developer community and portfolio-sharing platform. SkillSphere allows student developers to share project updates, discover technical work across different programming stacks, and connect through an interactive feed.
 
-Developer Feed: Post updates, share project milestones, tag skills, and attach image previews.
+---
 
-Interactions: Like posts, bookmark/save items, and leave inline comments on peers' work.
+## ✨ Features
 
-Explore & Tag Filtering: Discover trending posts and filter content by technical topics (#React, #CSS, #Python, #DBMS, etc.).
+- **🔐 Authentication:** Login and Sign-Up screens with form validation.
+- **📰 Developer Feed:** Share project updates, add descriptions, attach images, and add skill tags.
+- **🏷️ Multi-Tag Discovery:** Filter posts by technology tags like `#React`, `#CSS`, `#Python`, `#DBMS`, and `#UI/UX`.
+- **⭐ Bookmarks & Comments:** Like posts, add comments, and bookmark projects to a Saved tab.
+- **👤 User Profiles:** Individual student profiles showing stats, skills, and post history.
+- **🌓 Dark / Light Mode:** Built-in theme switcher across the whole application.
 
-User Profiles: View personal portfolios, stats (posts, followers, following), and activity feeds.
+---
 
-Theme Support: Clean, modern interface equipped with both Light and Dark mode toggles.
+## 🛠️ Tech Stack
 
-🛠️ Tech Stack
-Frontend: React.js
+- **Frontend:** React (Vite)
+- **Styling:** CSS3 (Flexbox & Grid, CSS Variables)
+- **Icons:** React Icons / SVGs
 
-Tooling & Build: Vite
+---
 
-Styling: CSS3 (Custom Responsive Layouts)
+## 🚀 How to Run Locally
 
-🚀 Getting Started
-Follow these steps to run the project locally on your machine:
-
-Prerequisites
-Make sure you have Node.js installed.
-
-Installation
-Clone the repository:
-
-Bash
-git clone https://github.com/YOUR_USERNAME/feeproject.git
-cd feeproject
-Install dependencies:
-
-Bash
-npm install
-Start the local development server:
-
-Bash
-npm run dev
-Open in browser:
-Navigate to http://localhost:5173 to see SkillSphere in action.
+1. **Clone the repo:**
+   ```bash
+   git clone [https://github.com/g5-0148/feeProject.git](https://github.com/g5-0148/feeProject.git)
+   cd feeproject
