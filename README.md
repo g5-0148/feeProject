@@ -1,16 +1,45 @@
-# React + Vite
+🌐 SkillSphere
+A collaborative tech and skill-sharing platform built for student developers to showcase projects, exchange ideas, and network.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+✨ Features
+User Authentication: Dedicated Login and Sign-Up flows with input validation.
 
-Currently, two official plugins are available:
+Developer Feed: Post updates, share project milestones, tag skills, and attach image previews.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Interactions: Like posts, bookmark/save items, and leave inline comments on peers' work.
 
-## React Compiler
+Explore & Tag Filtering: Discover trending posts and filter content by technical topics (#React, #CSS, #Python, #DBMS, etc.).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+User Profiles: View personal portfolios, stats (posts, followers, following), and activity feeds.
 
-## Expanding the ESLint configuration
+Theme Support: Clean, modern interface equipped with both Light and Dark mode toggles.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+🛠️ Tech Stack
+Frontend: React.js
+
+Tooling & Build: Vite
+
+Styling: CSS3 (Custom Responsive Layouts)
+
+🚀 Getting Started
+Follow these steps to run the project locally on your machine:
+
+Prerequisites
+Make sure you have Node.js installed.
+
+Installation
+Clone the repository:
+
+Bash
+git clone https://github.com/YOUR_USERNAME/feeproject.git
+cd feeproject
+Install dependencies:
+
+Bash
+npm install
+Start the local development server:
+
+Bash
+npm run dev
+Open in browser:
+Navigate to http://localhost:5173 to see SkillSphere in action.
