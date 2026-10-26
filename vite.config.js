@@ -4,5 +4,5 @@ import { defineConfig } from 'vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/feeProject/',
+  base: "/", // Change this from "/feeProject/" to "/" (or remove the base line completely)
 })

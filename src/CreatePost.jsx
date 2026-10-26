@@ -1,54 +1,77 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useApp } from "./context/AppContext";
+import { useZustandStore } from "./store/useZustandStore";
 
-export default function CreatePost({ onCreatePost }) {
+export default function CreatePost() {
+  const { currentUser } = useApp();
+  const { createPost } = useZustandStore();
   const [caption, setCaption] = useState("");
   const [image, setImage] = useState("");
-  const [skills, setSkills] = useState("");
+  const [skillsStr, setSkillsStr] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!caption.trim()) return;
-    const skillList = skills.split(",").map((s) => s.trim()).filter(Boolean);
-    onCreatePost({
+
+    const skills = skillsStr
+      .split(",")
+      .map((s) => s.trim().replace(/^#/, ""))
+      .filter(Boolean);
+
+    const newPost = {
+      postId: Date.now(),
+      userId: currentUser.userId,
       caption: caption.trim(),
       image: image.trim(),
-      skills: skillList.length ? skillList : ["Tech"]
-    });
+      skills,
+      likes: 0,
+      likedBy: [],
+      savedBy: [],
+      comments: [],
+    };
+
+    createPost(newPost);
+    navigate("/");
   };
 
   return (
-    <div className="card" style={{ padding: "24px" }}>
-      <h2 style={{ fontSize: 20, marginBottom: 16 }}>Share an Update</h2>
+    <div className="card" style={{ maxWidth: 600, margin: "0 auto" }}>
+      <h2 style={{ fontSize: 20, fontWeight: 700, marginBottom: 16 }}>Create New Developer Post</h2>
+      
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Caption</label>
+        <div style={{ marginBottom: 16 }}>
+          <label style={{ fontSize: 13, fontWeight: 600, display: "block", marginBottom: 6 }}>Caption / Update</label>
           <textarea
-            rows="3"
             required
-            placeholder="What project or skill are you working on?"
+            rows={4}
+            placeholder="What are you building or learning today?"
             value={caption}
             onChange={(e) => setCaption(e.target.value)}
           />
         </div>
-        <div className="form-group">
-          <label>Image URL (Optional)</label>
+
+        <div style={{ marginBottom: 16 }}>
+          <label style={{ fontSize: 13, fontWeight: 600, display: "block", marginBottom: 6 }}>Image URL (Unsplash or direct link)</label>
           <input
-            type="url"
             placeholder="https://images.unsplash.com/..."
             value={image}
             onChange={(e) => setImage(e.target.value)}
           />
         </div>
-        <div className="form-group">
-          <label>Skills / Tags (comma separated)</label>
+
+        <div style={{ marginBottom: 20 }}>
+          <label style={{ fontSize: 13, fontWeight: 600, display: "block", marginBottom: 6 }}>Skills / Tags (comma separated)</label>
           <input
-            placeholder="React, Java, UI/UX"
-            value={skills}
-            onChange={(e) => setSkills(e.target.value)}
+            placeholder="React, JavaScript, UI/UX"
+            value={skillsStr}
+            onChange={(e) => setSkillsStr(e.target.value)}
           />
         </div>
-        <button type="submit" className="btn" style={{ width: "100%", marginTop: 8 }}>
-          Publish Post
+
+        <button type="submit" className="btn" style={{ width: "100%", padding: "12px" }}>
+          Publish Post →
         </button>
       </form>
     </div>

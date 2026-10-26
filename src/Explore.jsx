@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import Post from "./Post";
+import { useApp } from "./context/AppContext";
+import { useZustandStore } from "./store/useZustandStore";
 
 const SKILLS = ["All", "React", "Java", "DBMS", "Python", "UI/UX", "CSS", "JavaScript"];
 
-export default function Explore({ posts, users, currentUser, onLike, onSave, onComment, onNavigate }) {
+export default function Explore() {
+  const posts = useZustandStore((state) => state.posts);
+  const { users } = useApp();
   const [activeSkill, setActiveSkill] = useState("All");
   const getUser = (id) => users.find((u) => u.userId === id);
 
@@ -31,16 +35,7 @@ export default function Explore({ posts, users, currentUser, onLike, onSave, onC
         </div>
       ) : (
         filtered.map((post) => (
-          <Post
-            key={post.postId}
-            post={post}
-            author={getUser(post.userId)}
-            currentUser={currentUser}
-            onLike={onLike}
-            onSave={onSave}
-            onComment={onComment}
-            onNavigate={onNavigate}
-          />
+          <Post key={post.postId} post={post} author={getUser(post.userId)} />
         ))
       )}
     </div>

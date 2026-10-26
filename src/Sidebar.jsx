@@ -1,28 +1,36 @@
 import React from "react";
+import { Link, useLocation } from "react-router-dom";
 import Avatar from "./Avatar";
+import { useApp } from "./context/AppContext";
 
-const NAV = [
-  { id: "home", label: "Home", icon: "⌂" },
-  { id: "explore", label: "Explore", icon: "⌕" },
-  { id: "create", label: "Create Post", icon: "＋" },
-  { id: "saved", label: "Saved", icon: "★" },
-  { id: "profile", label: "Profile", icon: "👤" },
-];
+export default function Sidebar() {
+  const { users, currentUser } = useApp();
+  const location = useLocation();
+  const path = location.pathname;
 
-export default function Sidebar({ page, users, currentUser, onNavigate }) {
   return (
     <aside className="sidebar" style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
       <div className="card" style={{ padding: "8px" }}>
-        {NAV.map((item) => (
-          <button
-            key={item.id}
-            className={`nav-item ${page === item.id ? "active" : ""}`}
-            onClick={() => onNavigate(item.id, item.id === "profile" ? currentUser.userId : null)}
-          >
-            <span>{item.icon}</span>
-            <span>{item.label}</span>
-          </button>
-        ))}
+        <Link to="/" className={`nav-item ${path === "/" ? "active" : ""}`}>
+          <span>⌂</span><span>Home</span>
+        </Link>
+        <Link to="/explore" className={`nav-item ${path === "/explore" ? "active" : ""}`}>
+          <span>⌕</span><span>Explore</span>
+        </Link>
+        <Link to="/js-hub" className={`nav-item ${path === "/js-hub" ? "active" : ""}`}>
+          <span>⚡</span><span>JS Concepts Hub</span>
+        </Link>
+        <Link to="/create" className={`nav-item ${path === "/create" ? "active" : ""}`}>
+          <span>＋</span><span>Create Post</span>
+        </Link>
+        <Link to="/saved" className={`nav-item ${path === "/saved" ? "active" : ""}`}>
+          <span>★</span><span>Saved</span>
+        </Link>
+        {currentUser && (
+          <Link to={`/profile/${currentUser.userId}`} className={`nav-item ${path.startsWith("/profile") ? "active" : ""}`}>
+            <span>👤</span><span>Profile</span>
+          </Link>
+        )}
       </div>
 
       <div className="card" style={{ padding: "12px" }}>
@@ -31,13 +39,13 @@ export default function Sidebar({ page, users, currentUser, onNavigate }) {
           <span className="badge">{users.length}</span>
         </div>
         {users.map((u) => (
-          <button key={u.userId} className="team-item" onClick={() => onNavigate("profile", u.userId)}>
+          <Link key={u.userId} to={`/profile/${u.userId}`} className="team-item">
             <Avatar name={u.name} size="sm" />
             <div style={{ textAlign: "left", minWidth: 0 }}>
               <div style={{ fontSize: "13px", fontWeight: "600" }}>{u.name}</div>
               <div style={{ fontSize: "11px", color: "#64748b" }}>@{u.username}</div>
             </div>
-          </button>
+          </Link>
         ))}
       </div>
     </aside>

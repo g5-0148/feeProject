@@ -1,7 +1,11 @@
 import React from "react";
 import Post from "./Post";
+import { useApp } from "./context/AppContext";
+import { useZustandStore } from "./store/useZustandStore";
 
-export default function Saved({ posts, users, currentUser, onLike, onSave, onComment, onNavigate }) {
+export default function Saved() {
+  const posts = useZustandStore((state) => state.posts);
+  const { users, currentUser } = useApp();
   const saved = posts.filter((p) => p.savedBy?.includes(currentUser?.userId));
   const getUser = (id) => users.find((u) => u.userId === id);
 
@@ -14,16 +18,7 @@ export default function Saved({ posts, users, currentUser, onLike, onSave, onCom
         </div>
       ) : (
         saved.map((post) => (
-          <Post
-            key={post.postId}
-            post={post}
-            author={getUser(post.userId)}
-            currentUser={currentUser}
-            onLike={onLike}
-            onSave={onSave}
-            onComment={onComment}
-            onNavigate={onNavigate}
-          />
+          <Post key={post.postId} post={post} author={getUser(post.userId)} />
         ))
       )}
     </div>

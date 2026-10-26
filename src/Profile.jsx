@@ -1,11 +1,22 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import Avatar from "./Avatar";
 import Post from "./Post";
+import { useApp } from "./context/AppContext";
+import { useZustandStore } from "./store/useZustandStore";
 
-export default function Profile({ users, posts, viewingUserId, currentUser, onFollow, onLike, onSave, onComment, onNavigate }) {
-  const profileUser = users.find((u) => u.userId === viewingUserId) || currentUser;
-  const userPosts = posts.filter((p) => p.userId === profileUser.userId);
-  const isMe = currentUser?.userId === profileUser.userId;
+export default function Profile() {
+  const { userId } = useParams();
+  const posts = useZustandStore((state) => state.posts);
+  const { users, currentUser, handleFollow } = useApp();
+
+  const profileUser = users.find((u) => u.userId === userId) || currentUser;
+  const userPosts = posts.filter((p) => p.userId === profileUser?.userId);
+  const isMe = currentUser?.userId === profileUser?.userId;
+
+  if (!profileUser) {
+    return <div className="card" style={{ padding: 30, textAlign: "center" }}>User not found.</div>;
+  }
 
   return (
     <div>
@@ -20,8 +31,8 @@ export default function Profile({ users, posts, viewingUserId, currentUser, onFo
             {!isMe && (
               <button
                 className="btn"
-                style={{ background: profileUser.isFollowing ? "#c8d3cc" : "#1b5e20", color: profileUser.isFollowing ? "#1e2922" : "#fff" }}
-                onClick={() => onFollow(profileUser.userId)}
+                style={{ background: profileUser.isFollowing ? "#c8d3cc" : "#10b981", color: profileUser.isFollowing ? "#1e2922" : "#fff" }}
+                onClick={() => handleFollow(profileUser.userId)}
               >
                 {profileUser.isFollowing ? "Following" : "Follow"}
               </button>
@@ -50,16 +61,7 @@ export default function Profile({ users, posts, viewingUserId, currentUser, onFo
         <div className="card" style={{ textAlign: "center", color: "#64748b" }}>No posts yet.</div>
       ) : (
         userPosts.map((post) => (
-          <Post
-            key={post.postId}
-            post={post}
-            author={profileUser}
-            currentUser={currentUser}
-            onLike={onLike}
-            onSave={onSave}
-            onComment={onComment}
-            onNavigate={onNavigate}
-          />
+          <Post key={post.postId} post={post} author={profileUser} />
         ))
       )}
     </div>
